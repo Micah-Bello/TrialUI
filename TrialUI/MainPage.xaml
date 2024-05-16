@@ -1,0 +1,341 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome"
+             x:Class="TrialUI.MainPage"
+             Shell.BackgroundColor="{StaticResource Primary}">
+
+    <ContentPage.Resources>
+        <ControlTemplate x:Key="RadioButtonTemplate">
+            <Border StrokeShape="RoundRectangle 8"
+                    BackgroundColor="Gray"
+                    HeightRequest="35"
+                    WidthRequest="65">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CheckedStates">
+                            <VisualState x:Name="Checked">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor"
+                                            Value="{StaticResource AppBlue}" />
+                                    <Setter TargetName="RBText"
+                                            Property="Label.TextColor"
+                                            Value="White" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Unchecked">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor"
+                                            Value="#DDDDDD" />
+                                    <Setter TargetName="RBText"
+                                            Property="Label.TextColor"
+                                            Value="Black" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+
+                <Label VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       TextColor="White"
+                       FontSize="10"
+                       x:Name="RBText"
+                       Text="{TemplateBinding Content}" />
+
+
+
+            </Border>
+        </ControlTemplate>
+
+        <Shadow x:Key="CardShadow"
+                Radius="1"
+                Opacity="0.2" />
+
+        <Style TargetType="RadioButton">
+            <Setter Property="ControlTemplate"
+                    Value="{StaticResource RadioButtonTemplate}" />
+        </Style>
+
+        <Style TargetType="Border"
+               x:Key="Card">
+            <Setter Property="Padding"
+                    Value="10" />
+            <Setter Property="StrokeShape"
+                    Value="RoundRectangle 10" />
+
+            <Setter Property="Shadow"
+                    Value="{StaticResource CardShadow}" />
+        </Style>
+    </ContentPage.Resources>
+
+
+    <Shell.TitleView>
+        <HorizontalStackLayout Spacing="10">
+            <Border StrokeShape="RoundRectangle 25"
+                    BackgroundColor="White"
+                    WidthRequest="40"
+                    HeightRequest="40">
+                <Image Source="dotnet_bot.png" />
+            </Border>
+            <Label Text="Order List"
+                   TextColor="White"
+                   FontAttributes="Bold"
+                   VerticalOptions="Center"
+                   FontSize="18" />
+        </HorizontalStackLayout>
+
+    </Shell.TitleView>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem>
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="FASolid"
+                                 Size="18"
+                                 Glyph="{x:Static fa:Solid.ChartArea}"
+                                 Color="White" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem>
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="FASolid"
+                                 Size="18"
+                                 Glyph="{x:Static fa:Solid.Bell}"
+                                 Color="White" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem>
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="FASolid"
+                                 Size="18"
+                                 Glyph="{x:Static fa:Solid.Message}"
+                                 Color="White" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="15"
+                             Spacing="15">
+
+            <Border Style="{StaticResource Card}">
+                <HorizontalStackLayout RadioButtonGroup.GroupName="filter"
+                                       Spacing="5">
+
+                    <Label Text="New Ord"
+                           FontSize="10"
+                           VerticalOptions="Center"
+                           FontAttributes="Bold" />
+                    <Image>
+                        <Image.Source>
+                            <FontImageSource FontFamily="FASolid"
+                                             Size="10"
+                                             Glyph="{x:Static fa:Solid.ArrowsSplitUpAndLeft}"
+                                             Color="Black" />
+                        </Image.Source>
+                    </Image>
+                    <RadioButton Content="Today" />
+                    <RadioButton Content="Yesterday" />
+                    <RadioButton Content="7 Days" />
+                </HorizontalStackLayout>
+
+            </Border>
+
+            <Frame HasShadow="True"
+                   BackgroundColor="#F9E1B3"
+                   BorderColor="#F9E1B3">
+                <Grid ColumnDefinitions="Auto,Auto,Auto,*,Auto"
+                      ColumnSpacing="5"
+                      VerticalOptions="Center">
+                    <Image>
+                        <Image.Source>
+                            <FontImageSource FontFamily="FASolid"
+                                             Size="18"
+                                             Glyph="{x:Static fa:Solid.CartShopping}"
+                                             Color="#B08A41" />
+                        </Image.Source>
+                    </Image>
+                    <Label Text="Pending Orders:"
+                           Grid.Column="1" />
+                    <Label Text="25"
+                           Grid.Column="2"
+                           FontSize="15"
+                           FontAttributes="Bold" />
+                    <Image Grid.Column="4">
+                        <Image.Source>
+                            <FontImageSource FontFamily="FASolid"
+                                             Size="18"
+                                             Glyph="{x:Static fa:Solid.Xmark}"
+                                             Color="#B08A41" />
+                        </Image.Source>
+                    </Image>
+                </Grid>
+            </Frame>
+
+            <Border Style="{StaticResource Card}">
+                <Grid RowDefinitions="*,*"
+                      ColumnDefinitions="Auto,*,Auto">
+                    <Grid Grid.Row="0"
+                          Grid.Column="0"
+                          ColumnSpacing="5"
+                          ColumnDefinitions="Auto,Auto,Auto"
+                          RowDefinitions="25,25,25">
+                        <Image>
+                            <Image.Source>
+                                <FontImageSource FontFamily="FASolid"
+                                                 Size="12"
+                                                 Glyph="{x:Static fa:Solid.EarthAsia}"
+                                                 Color="Blue" />
+                            </Image.Source>
+                        </Image>
+                        <Label Text="Ord No:"
+                               FontAttributes="Bold"
+                               Grid.Column="1" />
+                        <Label Text="03/14595"
+                               Grid.Column="2" />
+                        <Label Text="Ord Pld:"
+                               FontAttributes="Bold"
+                               Grid.Row="1"
+                               Grid.Column="1" />
+                        <Label Text="9:30"
+                               Grid.Row="1"
+                               Grid.Column="2" />
+                        <Label Text="Ord Rdy:"
+                               FontAttributes="Bold"
+                               Grid.Row="2"
+                               Grid.Column="1" />
+                        <Label Text="9:45"
+                               Grid.Row="2"
+                               Grid.Column="2" />
+
+
+                    </Grid>
+
+                    <Grid Grid.Column="2"
+                          Grid.Row="0"
+                          ColumnSpacing="8"
+                          RowDefinitions="*,*"
+                          ColumnDefinitions="Auto,*,Auto">
+
+                        <Border WidthRequest="35"
+                                HeightRequest="35"
+                                BackgroundColor="Black"
+                                StrokeShape="RoundRectangle 20">
+                            <Label Text="1"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   FontSize="16" />
+                        </Border>
+
+                        <Border Grid.Column="1"
+                                WidthRequest="70"
+                                HeightRequest="35"
+                                BackgroundColor="{StaticResource AppBlue}"
+                                StrokeShape="RoundRectangle 10">
+                            <Label Text="Done"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   FontSize="14" />
+                        </Border>
+
+                        <Image Grid.Column="2">
+                            <Image.Source>
+                                <FontImageSource FontFamily="FASolid"
+                                                 Size="10"
+                                                 Glyph="{x:Static fa:Solid.AngleRight}"
+                                                 Color="Grey" />
+                            </Image.Source>
+                        </Image>
+                        <Image Grid.Column="2"
+                               Grid.Row="1">
+                            <Image.Source>
+                                <FontImageSource FontFamily="FASolid"
+                                                 Size="15"
+                                                 Glyph="{x:Static fa:Solid.CircleHalfStroke}"
+                                                 Color="Black" />
+                            </Image.Source>
+                        </Image>
+                    </Grid>
+
+                    <Border Grid.ColumnSpan="3"
+                            BackgroundColor="Azure"
+                            StrokeShape="RoundRectangle 8"
+                            Stroke="Transparent"
+                            Padding="8"
+                            Grid.Row="1">
+                        <Grid ColumnSpacing="5"
+                              RowDefinitions="*,*"
+                              ColumnDefinitions="Auto,Auto,Auto,*,Auto,Auto,Auto">
+                            <Label Text="Item:"
+                                   FontAttributes="Bold" />
+                            <Label Text="01"
+                                   Grid.Column="1" />
+
+                            <Border Grid.Column="4"
+                                    HeightRequest="25"
+                                    WidthRequest="60"
+                                    Padding="3"
+                                    StrokeShape="RoundRectangle 15"
+                                    BackgroundColor="#17AD53">
+                                <Label Text="Finished"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center"
+                                       TextColor="White"
+                                       FontSize="Micro" />
+                            </Border>
+
+                            <Button Grid.Column="5"
+                                    BackgroundColor="LightGrey"
+                                    WidthRequest="30"
+                                    HeightRequest="35">
+                                <Button.ImageSource>
+                                    <FontImageSource FontFamily="FASolid"
+                                                     Size="15"
+                                                     Glyph="{x:Static fa:Solid.EllipsisVertical}"
+                                                     Color="Black" />
+                                </Button.ImageSource>
+                            </Button>
+                            <Button Grid.Column="6"
+                                    BackgroundColor="LightGrey"
+                                    WidthRequest="30"
+                                    HeightRequest="35">
+                                <Button.ImageSource>
+                                    <FontImageSource FontFamily="FASolid"
+                                                     Size="15"
+                                                     Glyph="{x:Static fa:Solid.Minus}"
+                                                     Color="Black" />
+                                </Button.ImageSource>
+                            </Button>
+                            <Label Text="SKU: "
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   Grid.Row="1"
+                                   Grid.Column="0" />
+                            <Label Text="276"
+                                   FontSize="18"
+                                   Grid.Row="1"
+                                   Grid.Column="1" />
+                            <Image Grid.Column="2"
+                                   Grid.Row="1">
+                                <Image.Source>
+                                    <FontImageSource FontFamily="FASolid"
+                                                     Size="18"
+                                                     Glyph="{x:Static fa:Solid.CircleCheck}"
+                                                     Color="Green" />
+                                </Image.Source>
+                            </Image>
+                        </Grid>
+                    </Border>
+
+                </Grid>
+
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
